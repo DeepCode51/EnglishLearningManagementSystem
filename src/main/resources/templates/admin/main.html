@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Let's study English !</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/static/css/cs-skin-elastic.css}">
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+
+    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+
+
+
+
+</head>
+
+
+<body>
+
+<!-- Left Panel -->
+<div th:replace="common/admin-leftbar::leftbar"/>
+
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <div th:replace="common/admin-header::header"/>
+
+    <!-- /#header -->
+    <!-- Content -->
+    <div class="content">
+        <!-- Animated -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="box-title">欢迎您，尊敬的管理员</h2>
+                            <br>
+                            <div>
+                                <p><b>您拥有以下的操作权限</b></p>
+                                <p>1、用户的增删改查</p>
+                                <p>2、单词的增删改查</p>
+                                <p>3、书籍的增删改查</p>
+                                <p>4、公告的增删改查</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+    </div>
+    <!-- /.content -->
+    <div class="clearfix"></div>
+    <!-- Footer -->
+    <div th:replace="common/footer::footer"/>
+
+    <!-- /.site-footer -->
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+<script th:src="@{/static/js/main.js}"></script>
+
+
+</body>
+</html>

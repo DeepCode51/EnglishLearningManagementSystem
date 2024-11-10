@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<aside id="left-panel" class="left-panel" th:fragment="leftbar">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a th:href="@{/main.html}"><i class="menu-icon fa fa-laptop"></i>主页</a>
+                    </li>
+                    <li class="menu-title">学习中心</li><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a th:href="@{/selectWord}" class="dropdown-toggle"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-edit"></i>背单词</a>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a th:href="@{/viewListen}" class="dropdown-toggle"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-headphones"></i>听听力</a>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a th:href="@{/viewbook}" class="dropdown-toggle"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>看书籍</a>
+                    </li>
+
+                    <li class="menu-item-has-children dropdown">
+                        <a th:href="@{/toCollection}" class="dropdown-toggle"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-folder-open"></i>收藏夹</a>
+                    </li>
+
+                    <li class="menu-title">个人中心</li><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a th:href="@{/toUser}" class="dropdown-toggle"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-exchange"></i>修改个人信息</a>
+                    </li>
+
+                    <li class="menu-item-has-children dropdown">
+                        <a th:href="@{/logout}" class="dropdown-toggle"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-level-down"></i>退出</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+</html>

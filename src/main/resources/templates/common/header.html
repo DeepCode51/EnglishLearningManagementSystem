@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header id="header" class="header" th:fragment="header">
+    <div class="top-left">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/main.html}"><img th:src="@{/static/images/logo.png}" alt="Logo"></a>
+            <a class="navbar-brand hidden" href="./"><img th:src="@{/static/images/logo2.png}" alt="Logo"></a>
+            <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+        </div>
+    </div>
+
+
+    <!-- 导航栏-->
+    <div class="top-right">
+        <div class="header-menu">
+            <div class="header-left">
+                <div class="dropdown for-notification">
+
+                    <a>尊敬的<b>[[${session.loginUser.getUserName()}]]</b>，欢迎您的到来！  </a>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                    </button>
+
+                    <div class="dropdown-menu" aria-labelledby="notification">
+                        <p class="red">控制中心</p>
+                        <a class="dropdown-item media" th:href="@{/toAdmin}">
+                            <i class="fa fa-user-secret"></i>
+                            <p>管理员</p>
+                        </a>
+                        <button onclick="UpdateUserName()"  class="dropdown-item media" >
+                            <i class="fa fa-cog" ></i>
+                            <p>修改名字</p>
+                        </button>
+                    <!--利用弹出框来修改名字-->
+                        <script>
+                            var oldname=[[${session.loginUser.getUserName()}]];
+                            function UpdateUserName() {
+                                console.log(oldname);
+                                var newname = prompt("请修改您的名字：", "");
+                                if (newname == null || newname == "") {
+                                    false ;
+                                } else {
+                                    window.location.href="/getStringParam/"+newname;
+                                }
+                            }
+                        </script>
+
+                        <a class="dropdown-item media" th:href="@{/logout}">
+                            <i class="fa fa-power-off"></i>
+                            <p>退出登录</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header >
+</html>

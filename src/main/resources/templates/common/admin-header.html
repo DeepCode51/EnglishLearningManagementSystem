@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header id="header" class="header"  th:fragment="header">
+
+    <div class="top-left" style="color: black">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/admin/main}"><img th:src="@{/static/images/logo.png}" alt="Logo"></a>
+            <a class="navbar-brand hidden" href=""><img src="../../static/images/logo2.png" alt="Logo"></a>
+            <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+        </div>
+    </div>
+
+
+    <!-- 导航栏-->
+    <div class="top-right">
+        <div class="header-menu">
+            <div class="header-left">
+                <div class="dropdown for-notification">
+                    管理员您好！
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user-secret"></i>
+                    </button>
+
+                    <div class="dropdown-menu" aria-labelledby="notification">
+                        <p class="red">控制中心</p>
+                        <a class="dropdown-item media" th:href="@{/main.html}">
+                            <i class="f fa fa-user"></i>
+                            <p>普通用户</p>
+                        </a>
+                        <a class="dropdown-item media" th:href="@{/logout}">
+                            <i class="fa fa-power-off"></i>
+                            <p>退出登录</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header >
+</html>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace：绑定一个对应的Dao/Mapper接口-->
+<mapper namespace="com.chun.myspringboot.mapper.WordMapper">
+
+    <!--
+    #######################################################
+                        增加
+    #######################################################
+    -->
+    <!--增加一个单词-->
+    <insert id="addWord" parameterType="Word">
+        insert into word(wordName, audio, explanation, example, grade) values (#{wordName},#{audio},#{explanation},#{example},#{grade});
+    </insert>
+
+    <!--
+    #######################################################
+                        删除
+    #######################################################
+    -->
+    <!--删除一个单词-->
+    <delete id="deleteWord" parameterType="Integer">
+        delete from word where wordId=#{wordId}
+    </delete>
+
+    <!--
+    #######################################################
+                        修改
+    #######################################################
+    -->
+    <!--修改一个单词-->
+    <update id="updateWord" parameterType="Word" >
+        update word set
+        wordName=#{wordName},audio=#{audio},explanation=#{explanation},example=#{example},grade=#{grade}
+        where wordId=#{wordId};
+    </update>
+    <!--修改一个单词study变为1-->
+    <update id="updateWordStudy1" parameterType="Integer">
+        update word set study=1 where wordId=#{wordId}
+    </update>
+    <!--修改一个单词study变为0-->
+    <update id="updateWordStudy0" parameterType="Integer">
+        update word set study=0 where wordId=#{wordId}
+    </update>
+
+    <!--修改一个单词remember变为1-->
+    <update id="updateWordRemember1" parameterType="Integer">
+        update word set remember=1 where wordId=#{wordId}
+    </update>
+    <!--修改一个单词remember变为0-->
+    <update id="updateWordRemember0" parameterType="Integer">
+        update word set remember=0 where wordId=#{wordId}
+    </update>
+
+    <!--修改一个单词Collection变为1-->
+    <update id="updateWordCollection1" parameterType="Integer">
+        update word set collection=1 where wordId=#{wordId}
+    </update>
+    <!--修改一个单词Collection变为0-->
+    <update id="updateWordCollection0" parameterType="Integer">
+        update word set collection=0 where wordId=#{wordId}
+    </update>
+
+    <!--根据等级，重新学习单词-->
+   <update id="updateWordStudyByGrade" parameterType="Integer">
+       update word set study=0,remember=0 where grade=#{grade}
+   </update>
+
+    <!--
+    #######################################################
+                        查看
+    #######################################################
+    -->
+    <!--查询所有单词信息-->
+    <select id="queryAllWord" resultType="Word">
+        select * from word
+    </select>
+
+    <!--根据ID查询一个单词的信息-->
+    <select id="queryWordById" resultType="Word">
+        select * from word where wordId=#{wordId}
+    </select>
+
+    <!--
+
+       学习功能（从数据库随机查询一个单词）
+
+    -->
+
+    <!--根据grade查询未学习的单词-->
+    <select id="queryWordStudy0ByGrade" resultType="Word">
+        select * from word where study=0 and grade=#{grade} ORDER BY RAND() limit 1
+    </select>
+
+    <!--根据grade查询所有的单词数量 -->
+    <select id="queryAllWordNumberByGrade" resultType="int">
+         SELECT COUNT(wordId) FROM word where grade=#{grade};
+    </select>
+    <!--根据grade查询已会单词数量 -->
+    <select id="queryRememberNumberByGrade" resultType="int">
+         SELECT COUNT(wordId) FROM word where grade=#{grade} and remember=1;
+    </select>
+    <!--根据grade查询已经学习单词数量-->
+    <select id="queryStudyNumberByGrade" resultType="int">
+         SELECT COUNT(wordId) FROM word where grade=#{grade} and study=1;
+    </select>
+
+
+    <!--查询所有收藏的单词 -->
+    <select id="queryAllWordCollection" resultType="Word">
+        select * from word where collection=1;
+    </select>
+
+    <!--根据Grade 查询收藏的单词 -->
+    <select id="queryAllWordCollectionByGrade" resultType="Word">
+        select * from word where collection=1 and grade=#{grade};
+    </select>
+
+    <!--查询所有记住的单词 -->
+    <select id="queryAllRemember" resultType="Word">
+         select * from word where Remember=1;
+    </select>
+
+    <!--根据grade查询记住的单词 -->
+    <select id="queryAllWordRememberByGrade" resultType="Word">
+         select * from word where Remember=1 and grade=#{grade};
+    </select>
+
+    <!--根据grade查询没有记住的单词 -->
+    <select id="queryAllWordUnrememberedByGrade" resultType="Word">
+         select * from word where Remember=1 and grade=#{grade};
+    </select>
+
+    <!--查询所有没有记住的单词 -->
+    <select id="queryAllUnremembered" resultType="Word">
+         select * from word where Remember=0;
+    </select>
+
+</mapper>

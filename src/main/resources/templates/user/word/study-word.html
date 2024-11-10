@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Let's study English !</title>
+    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/static/css/cs-skin-elastic.css}">
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+<div th:replace="common/leftbar::leftbar"></div>
+
+
+
+<div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    <!-- Header-->
+    <div th:replace="common/header::header"/>
+
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>当前位置</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="#">主页</a></li>
+                                <li><a href="#">学习中心</a></li>
+                                <li class="active">背单词</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card" >
+                    <div  class="card-header">
+
+                        <h2 th:text="${word.getWordName()}">CET4 </h2>
+                        <button  onclick="playAudio()" th:text="${word.getAudio()}" >[apple]</button>
+                        <audio id='audioPlay' src='http://dict.youdao.com/speech?audio=mild' th:value="${word.getWordName()}"/>
+
+                    </div>
+                    <div class="card-body " id="body">
+
+                        <!--                       单词解释-->
+                        <br>
+                        <hr>
+                        <br>
+                        <!--                        例句 -->
+                    </div>
+
+                </div>
+                <script th:inline="javascript">
+
+                    function playAudio(){
+                        //得到读音名字
+                        var word=[[${word.getWordName()}]];
+                        console.log(word);
+                        //改变读音地址
+                        document.getElementById('audioPlay').src='http://dict.youdao.com/speech?audio='+word;
+                        document.getElementById('audioPlay').play();
+                    }
+                </script>
+
+
+                <a th:href="@{/rememberWord/}+${word.getWordId()}" class="btn btn-success btn-lg btn-block">认识</a>
+                <a th:href="@{/unrememberWord/}+${word.getWordId()}" class="btn btn-danger btn-lg btn-block">不认识</a>
+                <a th:href="@{/studyNextWord/}+${word.getGrade()}" class="btn btn-secondary btn-lg btn-block">下一个</a>
+
+            </div>
+            <!--进度条-->
+            <div class="col-lg-4" th:fragment="cet-progress">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="progress-box progress-1">
+                            <h4 class="por-title">学习记录</h4>
+                            <div class="por-txt">[[${study}]]</div>
+                            <div class="progress mb-2" style="height: 5px;">
+                                <div id="study" class="progress-bar bg-flat-color-1" role="progressbar" style="width: 40%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <!--从后台获取%，修改样式-->
+                        <script th:inline="javascript">
+                            var num = [[${study}]];
+                            console.log(num);
+                            var obj=document.getElementById('study');
+                            obj.style.width= num ;
+                        </script>
+
+                        <div class="progress-box progress-1">
+                            <h4 class="por-title">已记住</h4>
+                            <div class="por-txt">[[${remember}]]</div>
+                            <div class="progress mb-2" style="height: 5px;">
+                                <div id="remember" class="progress-bar bg-flat-color-1" role="progressbar" style="width: 40%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <!--从后台获取%，修改样式-->
+                        <script th:inline="javascript">
+                            var num = [[${remember}]];
+                            console.log(num);
+                            var obj=document.getElementById('remember');
+                            obj.style.width= num ;
+                        </script>
+                        <div class="progress-box progress-2">
+                            <h4 class="por-title">未记住</h4>
+                            <div class="por-txt" >[[${unremembered}]]</div>
+                            <div class="progress mb-2" style="height: 5px;">
+                                <div id="unremembered" class="progress-bar bg-flat-color-4" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <!--从后台获取%，修改样式-->
+                        <script th:inline="javascript">
+                            var num = [[${unremembered}]];
+                            console.log(num);
+                            var obj=document.getElementById('unremembered');
+                            obj.style.width= num ;
+                        </script>
+                        <a   th:href="@{/addCollection/}+${word.getWordId()}"  class="btn btn-outline-secondary btn-lg btn-block"  th:text="${msg}">加入收藏</a>
+                        <button  onclick="ResetWord()"  class="btn btn-outline-warning btn-lg btn-block">重新学习</button>
+
+                        <script>
+                            function ResetWord() {
+                                if (confirm("您确定需要重新学习吗？")) {
+                                    window.location.href="/ResetWord/"+[[${word.getGrade()}]];
+                                } else {
+                                    return false;
+                                }
+                            }
+                        </script>
+                    </div> <!-- /.card-body -->
+                </div>
+            </div>
+
+
+        </div>
+
+    </div><!-- .content -->
+
+    <div class="clearfix"></div>
+
+    <div th:replace="common/footer::footer"/>
+
+
+</div><!-- /#right-panel -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+<script th:src="@{/static/js/main.js}"></script>
+</body>
+</html>

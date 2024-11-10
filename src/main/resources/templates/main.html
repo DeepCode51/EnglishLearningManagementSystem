@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Let's study English !</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/static/css/cs-skin-elastic.css}">
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+
+    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+
+<style>
+    .notice{
+        text-indent: 40px;
+    }
+
+</style>
+    <style>
+    #weatherWidget .currentDesc {
+        color: #ffffff!important;
+    }
+    .traffic-chart {
+        min-height: 335px;
+    }
+    #flotPie1  {
+        height: 150px;
+    }
+    #flotPie1 td {
+        padding:3px;
+    }
+    #flotPie1 table {
+        top: 20px!important;
+        right: -10px!important;
+    }
+    .chart-container {
+        display: table;
+        min-width: 270px ;
+        text-align: left;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    #flotLine5  {
+        height: 105px;
+    }
+
+    #flotBarChart {
+        height: 150px;
+    }
+    #cellPaiChart{
+        height: 160px;
+    }
+
+</style>
+
+
+</head>
+
+
+<body>
+
+<!-- Left Panel -->
+<div th:replace="common/leftbar::leftbar"/>
+
+
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+
+<div th:replace="common/header::header"/>
+    <!-- /#header -->
+    <!-- Content -->
+    <div class="content">
+        <!-- Animated -->
+        <div class="animated fadeIn">
+
+            <div class="row">
+                <!-- 公告-->
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="box-title">最新公告</h2>
+                            <hr>
+
+                            <h4 class="text-center" th:text="${notice.getTitle()}">标题</h4>
+                            <br>
+                            <!-- 用th:utext会解析html-->
+                                <p class="notice" th:utext="${notice.getContent()}"></p>
+                            <a th:href="@{/toViewNotice}" type="button" class="btn btn-link float-right">历史公告</a>
+                        </div>
+                    </div>
+                </div><!-- /# column -->
+                <!--每日一句-->
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>每日一句</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="default-tab">
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">句子</a>
+                                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">翻译</a>
+                                    </div>
+                                </nav>
+                                <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                        <p th:text="${sentence.getSentenceName()}">句子显示在这里 </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                        <p th:text="${sentence.getExplain()}">翻译显示在这里</p>
+                                    </div>
+
+                                </div>
+                                <img src="https://bing.yingjoy.cn/?t=bing&w=1920">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+                <a class="col-lg-4 col-md-12"  th:href="@{/selectWord}">
+                    <div class="card ">
+                        <div class="card-body btn btn-success">
+                            <h2>背单词</h2>
+                        </div>
+                    </div>
+                </a>
+                <a class="col-lg-4 col-md-12"  th:href="@{/viewListen}">
+                    <div class="card ">
+                        <div class="card-body btn btn-info">
+                            <h2>练听力</h2>
+                        </div>
+                    </div>
+                </a>
+                <a class="col-lg-4 col-md-12"  th:href="@{/viewbook}">
+                    <div class="card ">
+                        <div class="card-body btn btn-primary">
+                            <h2>看阅读</h2>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- /.content -->
+    <div class="clearfix"></div>
+    <!-- Footer -->
+    <div th:replace="common/footer::footer"/>
+
+    <!-- /.site-footer -->
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+<script th:src="@{/static/js/main.js}"></script>
+
+
+</body>
+</html>
